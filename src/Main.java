@@ -6,13 +6,14 @@ public class Main {
         TaskManager manager = new TaskManager();
         int option = 0;
 
-        while (option != 5) {
+        while (option != 6) {
             System.out.println("\n --- TO-DO LIST ---");
             System.out.println("1. Add Task");
             System.out.println("2. List Tasks");
             System.out.println("3. Complete Task");
-            System.out.println("4. Remove Task");
-            System.out.println("5. Exit");
+            System.out.println("4. Change Priority");
+            System.out.println("5. Remove Task");
+            System.out.println("6. Exit");
             System.out.println("Choose an option: ");
 
             option = scanner.nextInt();
@@ -22,7 +23,9 @@ public class Main {
                 case 1:
                     System.out.println("Enter task description: ");
                     String desc = scanner.nextLine();
-                    manager.addTask(desc);
+                    System.out.println("Enter task priority: ");
+                    int priority = scanner.nextInt();
+                    manager.addTask(desc, priority);
                     break;
                 case 2:
                     manager.listAll();
@@ -33,11 +36,18 @@ public class Main {
                     manager.markAsDoneById(idComplete);
                     break;
                 case 4:
+                    System.out.println("Enter task ID to change priority: ");
+                    int idPriority = scanner.nextInt();
+                    System.out.println("Enter new value to priority: ");
+                    int newPriority = scanner.nextInt();
+                    manager.changePriority(idPriority, newPriority);
+                    break;
+                case 5:
                     System.out.println("Enter task ID to remove: ");
                     int idRemove = scanner.nextInt();
                     manager.deleteTask(idRemove);
                     break;
-                case 5:
+                case 6:
                     System.out.println("Exiting... Goodbye");
                     break;
                 default:

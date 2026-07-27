@@ -9,8 +9,14 @@ public class TaskManager {
         this.nextId = 1;
     }
 
-    public void addTask(String description) {
-        Task newTask = new Task(this.nextId, description); // o status inicia FALSE
+    public void addTask(String description, int priority) {
+        if (priority > 5) {
+            System.out.println("Error: Max value priority is 5.");
+            System.out.println("Try again");
+            return;
+        }
+
+        Task newTask = new Task(this.nextId, description, priority); // o status inicia FALSE
         this.Tasks.add(newTask);
 
         System.out.println("Task successfully added! (ID: " + this.nextId + ")");
@@ -49,6 +55,17 @@ public class TaskManager {
             if (t.getId() == id) {
                 this.Tasks.remove(t);
                 System.out.println("Task ID " + id + " successfully removed!");
+                return;
+            }
+            System.out.println("Error: No task found with ID " + id);
+        }
+    }
+
+    public void changePriority(int id, int priority) {
+        for (Task t : this.Tasks) {
+            if (t.getId() == id) {
+                t.toString();
+                t.setPriority(priority);
                 return;
             }
             System.out.println("Error: No task found with ID " + id);
