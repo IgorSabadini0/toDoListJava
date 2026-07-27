@@ -23,10 +23,6 @@ public class Task {
         return this.isDone;
     }
 
-    public int getPriority() {
-        return this.priority;
-    }
-
     public void setPriority(int priority) {
         this.priority = priority;
     }
