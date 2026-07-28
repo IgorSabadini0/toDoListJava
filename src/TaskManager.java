@@ -21,10 +21,11 @@ public class TaskManager {
 
         System.out.println("Task successfully added! (ID: " + this.nextId + ")");
         this.nextId++;
+        listAll();
     }
 
     public void listAll() {
-        System.out.println("\n ==== MY TASKS ====");
+        System.out.println("\n==== MY TASKS ====");
         if (this.Tasks.isEmpty()) {
             System.out.println("No tasks registered yet.");
             return;
@@ -40,14 +41,31 @@ public class TaskManager {
             if (t.getId() == id) {
                 if (t.isDone()) {
                     System.out.println("Warning: Task ID " + id + " is already completed!");
-                } else {
-                    t.markAsDone();
-                    System.out.println("Task ID " + id + " marked as completed!");
+                    return;
                 }
+                t.markAsDone();
+                System.out.println("Task ID " + id + " marked as completed!");
+                listAll();
                 return;
             }
         }
         System.out.println("Error: No task found with ID " + id);
+    }
+
+    public void markAsIncomplete(int id) {
+        for (Task t : Tasks) {
+            if (t.getId() == id) {
+                if (!t.isDone()) {
+                    System.out.println("Warning: Task ID " + id + " is still incomplete.");
+                    return;
+                }
+                t.markAsIncomplete();
+                System.out.println("Task ID " + id + " marked as incomplete.");
+                listAll();
+                return;
+            }
+            System.out.println("Error: No task found with ID " + id);
+        }
     }
 
     public void deleteTask(int id) {
@@ -55,6 +73,7 @@ public class TaskManager {
             if (t.getId() == id) {
                 this.Tasks.remove(t);
                 System.out.println("Task ID " + id + " successfully removed!");
+                listAll();
                 return;
             }
             System.out.println("Error: No task found with ID " + id);
@@ -64,8 +83,13 @@ public class TaskManager {
     public void changePriority(int id, int priority) {
         for (Task t : this.Tasks) {
             if (t.getId() == id) {
-                t.toString();
+                if (priority > 5) {
+                    System.out.println("Error: Max value priority is 5.");
+                    System.out.println("Try again");
+                    return;
+                }
                 t.setPriority(priority);
+                listAll();
                 return;
             }
             System.out.println("Error: No task found with ID " + id);
