@@ -32,12 +32,12 @@ public class Main {
                     manager.listAll();
                     break;
                 case 3:
-                    System.out.println("Enter task ID to complete: ");
+                    System.out.println("Enter task ID to mark as complete: ");
                     int idComplete = scanner.nextInt();
                     manager.markAsDoneById(idComplete);
                     break;
                 case 4:
-                    System.out.println("Enter task ID to incomplete: ");
+                    System.out.println("Enter task ID to mark as incomplete: ");
                     int idIncomplete = scanner.nextInt();
                     manager.markAsIncomplete(idIncomplete);
                     break;
